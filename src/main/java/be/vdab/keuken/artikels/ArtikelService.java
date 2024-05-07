@@ -17,4 +17,10 @@ class ArtikelService {
     Optional<Artikel> findById(long id) {
         return artikelRepository.findById(id);
     }
+    @Transactional
+    long create(NieuweArtikel nieuweArtikel) {
+        Artikel artikel = new Artikel(nieuweArtikel.naam(), nieuweArtikel.aankoopprijs(), nieuweArtikel.verkoopprijs());
+        artikelRepository.save(artikel);
+        return artikel.getId();
+    }
 }
