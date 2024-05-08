@@ -3,6 +3,7 @@ package be.vdab.keuken.artikels;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,5 +23,8 @@ class ArtikelService {
         Artikel artikel = new Artikel(nieuweArtikel.naam(), nieuweArtikel.aankoopprijs(), nieuweArtikel.verkoopprijs());
         artikelRepository.save(artikel);
         return artikel.getId();
+    }
+    List<Artikel> findByNaamBevat(String woord) {
+        return artikelRepository.findByNaamContainingOrderByNaam(woord);
     }
 }

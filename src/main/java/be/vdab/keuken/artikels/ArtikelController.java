@@ -3,6 +3,8 @@ package be.vdab.keuken.artikels;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("artikels")
 class ArtikelController {
@@ -21,5 +23,9 @@ class ArtikelController {
     @PostMapping
     long create(@RequestBody @Valid NieuweArtikel nieuweArtikel) {
         return artikelService.create(nieuweArtikel);
+    }
+    @GetMapping(params = "naamBevat")
+    List<Artikel> findByNaamBevat(String naamBevat) {
+        return artikelService.findByNaamBevat(naamBevat);
     }
 }
