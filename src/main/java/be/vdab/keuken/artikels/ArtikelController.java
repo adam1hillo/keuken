@@ -3,6 +3,7 @@ package be.vdab.keuken.artikels;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -27,5 +28,13 @@ class ArtikelController {
     @GetMapping(params = "naamBevat")
     List<Artikel> findByNaamBevat(String naamBevat) {
         return artikelService.findByNaamBevat(naamBevat);
+    }
+    @GetMapping(params = "minimumWinst")
+    List<Artikel> findByMinimumWinst(BigDecimal minimumWinst) {
+        return artikelService.findByMinimumWinst(minimumWinst);
+    }
+    @GetMapping("verkoopprijzen/goedkoopste")
+    BigDecimal findGoedkoopsteVerkoopprijs() {
+        return artikelService.findGoedkopsteVerkoopprijs();
     }
 }

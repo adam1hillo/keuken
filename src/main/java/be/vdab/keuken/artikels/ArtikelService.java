@@ -3,6 +3,7 @@ package be.vdab.keuken.artikels;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,5 +27,11 @@ class ArtikelService {
     }
     List<Artikel> findByNaamBevat(String woord) {
         return artikelRepository.findByNaamContainingOrderByNaam(woord);
+    }
+    List<Artikel> findByMinimumWinst(BigDecimal minimum) {
+        return artikelRepository.findByMinimumWinst(minimum);
+    }
+    BigDecimal findGoedkopsteVerkoopprijs() {
+        return artikelRepository.findGoedkoopsteVerkoopprijs();
     }
 }
