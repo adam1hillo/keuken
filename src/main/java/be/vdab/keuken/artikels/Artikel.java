@@ -23,6 +23,9 @@ class Artikel {
         this.aankoopprijs = aankoopprijs;
         this.verkoopprijs = verkoopprijs;
     }
+    void setVerkoopprijs(BigDecimal verkoopprijs) {
+        this.verkoopprijs = verkoopprijs;
+    }
 
     public long getId() {
         return id;

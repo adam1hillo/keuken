@@ -34,4 +34,10 @@ class ArtikelService {
     BigDecimal findGoedkopsteVerkoopprijs() {
         return artikelRepository.findGoedkoopsteVerkoopprijs();
     }
+    @Transactional
+    void wijzigVerkoopprijs(long id, BigDecimal verkoopprijs) {
+        artikelRepository.findById(id)
+                .orElseThrow(ArtikelNietGevondenException::new)
+                .setVerkoopprijs(verkoopprijs);
+    }
 }
