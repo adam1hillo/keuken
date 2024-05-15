@@ -1,2 +1,2 @@
-insert into artikels (naam, aankoopprijs, verkoopprijs)
-values ('test', 10, 11);
+insert into artikels (naam, aankoopprijs, verkoopprijs, soort, houdbaarheid)
+values ('test', 10, 11, 'F', 3);

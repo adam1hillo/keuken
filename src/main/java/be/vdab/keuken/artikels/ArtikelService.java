@@ -19,12 +19,22 @@ class ArtikelService {
     Optional<Artikel> findById(long id) {
         return artikelRepository.findById(id);
     }
+
     @Transactional
-    long create(NieuweArtikel nieuweArtikel) {
-        Artikel artikel = new Artikel(nieuweArtikel.naam(), nieuweArtikel.aankoopprijs(), nieuweArtikel.verkoopprijs());
+    long create(NieuwFoodArtikel nieuwArtikel) {
+        FoodArtikel artikel = new FoodArtikel(nieuwArtikel.naam(), nieuwArtikel.aankoopprijs(), nieuwArtikel.verkoopprijs(), nieuwArtikel.houdbaarheid());
         artikelRepository.save(artikel);
         return artikel.getId();
     }
+    @Transactional
+    long create(NieuwNonFoodArtikel nieuwArtikel) {
+        NonFoodArtikel artikel = new NonFoodArtikel(nieuwArtikel.naam(), nieuwArtikel.aankoopprijs(), nieuwArtikel.verkoopprijs(), nieuwArtikel.garantie());
+        artikelRepository.save(artikel);
+        return artikel.getId();
+    }
+
+
+
     List<Artikel> findByNaamBevat(String woord) {
         return artikelRepository.findByNaamContainingOrderByNaam(woord);
     }

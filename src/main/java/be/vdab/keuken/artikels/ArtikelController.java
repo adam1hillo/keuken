@@ -24,10 +24,17 @@ class ArtikelController {
         return artikelService.findById(id)
                 .orElseThrow(ArtikelNietGevondenException::new);
     }
-    @PostMapping
-    long create(@RequestBody @Valid NieuweArtikel nieuweArtikel) {
-        return artikelService.create(nieuweArtikel);
+    @PostMapping("food")
+    long create(@RequestBody @Valid NieuwFoodArtikel nieuwArtikel) {
+        return artikelService.create(nieuwArtikel);
     }
+    @PostMapping("nonfood")
+    long create(@RequestBody @Valid NieuwNonFoodArtikel nieuwArtikel) {
+        return artikelService.create(nieuwArtikel);
+    }
+
+
+
     @GetMapping(params = "naamBevat")
     List<Artikel> findByNaamBevat(String naamBevat) {
         return artikelService.findByNaamBevat(naamBevat);

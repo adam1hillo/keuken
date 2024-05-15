@@ -5,8 +5,10 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "artikels")
-class Artikel {
+@DiscriminatorColumn(name = "soort")
+abstract class Artikel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,8 +17,7 @@ class Artikel {
     private BigDecimal aankoopprijs;
     private BigDecimal verkoopprijs;
 
-    protected Artikel() {
-    }
+    protected Artikel() {};
 
     Artikel(String naam, BigDecimal aankoopprijs, BigDecimal verkoopprijs) {
         this.naam = naam;
