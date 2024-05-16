@@ -20,6 +20,10 @@ class ArtikelService {
         return artikelRepository.findById(id);
     }
 
+    List<Artikel> findAll() {
+        return artikelRepository.findAll();
+    }
+
     @Transactional
     long create(NieuwFoodArtikel nieuwArtikel) {
         FoodArtikel artikel = new FoodArtikel(nieuwArtikel.naam(), nieuwArtikel.aankoopprijs(), nieuwArtikel.verkoopprijs(), nieuwArtikel.houdbaarheid());

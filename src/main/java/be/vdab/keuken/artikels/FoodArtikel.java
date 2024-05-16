@@ -2,7 +2,7 @@ package be.vdab.keuken.artikels;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+
 
 import java.math.BigDecimal;
 

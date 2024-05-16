@@ -19,6 +19,11 @@ class ArtikelController {
         this.artikelService = artikelService;
     }
 
+    @GetMapping
+    List<Artikel> findAll() {
+        return artikelService.findAll();
+    }
+
     @GetMapping("{id}")
     Artikel findById(@PathVariable long id) {
         return artikelService.findById(id)
