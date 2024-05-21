@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("artikels")
@@ -20,8 +21,10 @@ class ArtikelController {
     }
 
     @GetMapping
-    List<Artikel> findAll() {
-        return artikelService.findAll();
+    Stream<ArtikelBeknopt> findAll() {
+        return artikelService.findAll()
+                .stream()
+                .map(ArtikelBeknopt::new);
     }
 
     @GetMapping("{id}")
@@ -41,12 +44,16 @@ class ArtikelController {
 
 
     @GetMapping(params = "naamBevat")
-    List<Artikel> findByNaamBevat(String naamBevat) {
-        return artikelService.findByNaamBevat(naamBevat);
+    Stream<ArtikelBeknopt> findByNaamBevat(String naamBevat) {
+        return artikelService.findByNaamBevat(naamBevat)
+                .stream()
+                .map(ArtikelBeknopt::new);
     }
     @GetMapping(params = "minimumWinst")
-    List<Artikel> findByMinimumWinst(BigDecimal minimumWinst) {
-        return artikelService.findByMinimumWinst(minimumWinst);
+    Stream<ArtikelBeknopt> findByMinimumWinst(BigDecimal minimumWinst) {
+        return artikelService.findByMinimumWinst(minimumWinst)
+                .stream()
+                .map(ArtikelBeknopt::new);
     }
     @GetMapping("verkoopprijzen/goedkoopste")
     BigDecimal findGoedkoopsteVerkoopprijs() {
@@ -55,5 +62,10 @@ class ArtikelController {
     @PatchMapping("{id}/verkoopprijs")
     void wijzigVerkoopprijs(@PathVariable long id, @RequestBody @NotNull @PositiveOrZero BigDecimal prijs) {
         artikelService.wijzigVerkoopprijs(id, prijs);
+    }
+    private record ArtikelBeknopt(long id, String naam, BigDecimal verkoopprijs) {
+        ArtikelBeknopt(Artikel artikel) {
+            this(artikel.getId(), artikel.getNaam(), artikel.getVerkoopprijs());
+        }
     }
 }
