@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 interface ArtikelRepository extends JpaRepository<Artikel, Long> {
     List<Artikel> findByNaamContainingOrderByNaam(String woord);

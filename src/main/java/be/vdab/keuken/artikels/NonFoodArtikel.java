@@ -14,8 +14,8 @@ class NonFoodArtikel extends Artikel{
     protected NonFoodArtikel() {
     }
 
-    NonFoodArtikel(String naam, BigDecimal aankoopprijs, BigDecimal verkoopprijs, int garantie) {
-        super(naam, aankoopprijs, verkoopprijs);
+    NonFoodArtikel(String naam, BigDecimal aankoopprijs, BigDecimal verkoopprijs, ArtikelGroep artikelGroep, int garantie) {
+        super(naam, aankoopprijs, verkoopprijs, artikelGroep);
         this.garantie = garantie;
     }
 

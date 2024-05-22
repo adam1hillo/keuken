@@ -11,9 +11,11 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 class ArtikelService {
     private final ArtikelRepository artikelRepository;
+    private final ArtikelGroepRepository artikelGroepRepository;
 
-    ArtikelService(ArtikelRepository artikelRepository) {
+    ArtikelService(ArtikelRepository artikelRepository, ArtikelGroepRepository artikelGroepRepository) {
         this.artikelRepository = artikelRepository;
+        this.artikelGroepRepository = artikelGroepRepository;
     }
 
     Optional<Artikel> findById(long id) {
@@ -26,13 +28,17 @@ class ArtikelService {
 
     @Transactional
     long create(NieuwFoodArtikel nieuwArtikel) {
-        FoodArtikel artikel = new FoodArtikel(nieuwArtikel.naam(), nieuwArtikel.aankoopprijs(), nieuwArtikel.verkoopprijs(), nieuwArtikel.houdbaarheid());
+        ArtikelGroep artikelGroep = artikelGroepRepository.findById(nieuwArtikel.artikelgroepId())
+                .orElseThrow(ArtikelGroepNietGevondenException::new);
+        FoodArtikel artikel = new FoodArtikel(nieuwArtikel.naam(), nieuwArtikel.aankoopprijs(), nieuwArtikel.verkoopprijs(), artikelGroep, nieuwArtikel.houdbaarheid());
         artikelRepository.save(artikel);
         return artikel.getId();
     }
     @Transactional
     long create(NieuwNonFoodArtikel nieuwArtikel) {
-        NonFoodArtikel artikel = new NonFoodArtikel(nieuwArtikel.naam(), nieuwArtikel.aankoopprijs(), nieuwArtikel.verkoopprijs(), nieuwArtikel.garantie());
+        ArtikelGroep artikelGroep = artikelGroepRepository.findById(nieuwArtikel.artikelgroepId())
+                .orElseThrow(ArtikelGroepNietGevondenException::new);
+        NonFoodArtikel artikel = new NonFoodArtikel(nieuwArtikel.naam(), nieuwArtikel.aankoopprijs(), nieuwArtikel.verkoopprijs(), artikelGroep, nieuwArtikel.garantie());
         artikelRepository.save(artikel);
         return artikel.getId();
     }

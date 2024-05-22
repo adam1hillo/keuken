@@ -8,7 +8,7 @@ import org.springframework.test.context.jdbc.Sql;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
-@Sql("/artikels.sql")
+@Sql({"/artikelgroepen.sql", "/artikels.sql"})
 class ArtikelRepositoryTest {
     private static final String ARTIKELS_TABLE = "artikels";
     private final ArtikelRepository artikelRepository;

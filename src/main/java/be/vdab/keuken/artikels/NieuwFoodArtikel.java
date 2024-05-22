@@ -8,5 +8,5 @@ import jakarta.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 
 record NieuwFoodArtikel(@NotBlank String naam, @NotNull @PositiveOrZero BigDecimal aankoopprijs,
-                        @NotNull @PositiveOrZero BigDecimal verkoopprijs, @Positive int houdbaarheid) {
+                        @NotNull @PositiveOrZero BigDecimal verkoopprijs, @Positive long artikelgroepId, @Positive int houdbaarheid) {
 }

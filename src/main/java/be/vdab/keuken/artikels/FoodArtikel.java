@@ -16,8 +16,8 @@ class FoodArtikel extends Artikel {
 
     }
 
-    FoodArtikel(String naam, BigDecimal aankoopprijs, BigDecimal verkoopprijs, int houdbaarheid) {
-        super(naam, aankoopprijs, verkoopprijs);
+    FoodArtikel(String naam, BigDecimal aankoopprijs, BigDecimal verkoopprijs, ArtikelGroep artikelGroep, int houdbaarheid) {
+        super(naam, aankoopprijs, verkoopprijs, artikelGroep);
         this.houdbaarheid = houdbaarheid;
     }
 

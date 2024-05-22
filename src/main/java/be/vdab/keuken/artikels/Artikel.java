@@ -26,12 +26,17 @@ abstract class Artikel {
     @OrderBy("vanafAantal")
     private Set<Korting> kortingen;
 
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "artikelgroepId")
+    private ArtikelGroep artikelGroep;
+
     protected Artikel() {};
 
-    Artikel(String naam, BigDecimal aankoopprijs, BigDecimal verkoopprijs) {
+    Artikel(String naam, BigDecimal aankoopprijs, BigDecimal verkoopprijs, ArtikelGroep artikelGroep) {
         this.naam = naam;
         this.aankoopprijs = aankoopprijs;
         this.verkoopprijs = verkoopprijs;
+        this.artikelGroep = artikelGroep;
         kortingen = new LinkedHashSet<>();
     }
     void setVerkoopprijs(BigDecimal verkoopprijs) {
@@ -56,5 +61,9 @@ abstract class Artikel {
 
     public Set<Korting> getKortingen() {
         return Collections.unmodifiableSet(kortingen);
+    }
+
+    public ArtikelGroep getArtikelGroep() {
+        return artikelGroep;
     }
 }

@@ -28,8 +28,15 @@ class ArtikelController {
     }
 
     @GetMapping("{id}")
-    Artikel findById(@PathVariable long id) {
+    ArtikelBeknopt findById(@PathVariable long id) {
         return artikelService.findById(id)
+                .map(ArtikelBeknopt::new)
+                .orElseThrow(ArtikelNietGevondenException::new);
+    }
+    @GetMapping("{id}/artikelGroepNaam")
+    String findArtikelGroepNaamByArtikelId(@PathVariable long id) {
+        return artikelService.findById(id)
+                .map(artikel -> artikel.getArtikelGroep().getNaam())
                 .orElseThrow(ArtikelNietGevondenException::new);
     }
     @PostMapping("food")
