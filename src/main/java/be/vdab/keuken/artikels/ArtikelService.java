@@ -31,6 +31,7 @@ class ArtikelService {
         ArtikelGroep artikelGroep = artikelGroepRepository.findById(nieuwArtikel.artikelgroepId())
                 .orElseThrow(ArtikelGroepNietGevondenException::new);
         FoodArtikel artikel = new FoodArtikel(nieuwArtikel.naam(), nieuwArtikel.aankoopprijs(), nieuwArtikel.verkoopprijs(), artikelGroep, nieuwArtikel.houdbaarheid());
+
         artikelRepository.save(artikel);
         return artikel.getId();
     }

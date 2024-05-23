@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -65,5 +66,17 @@ abstract class Artikel {
 
     public ArtikelGroep getArtikelGroep() {
         return artikelGroep;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof Artikel artikel)) return false;
+        return naam.equalsIgnoreCase(artikel.naam);
+    }
+
+    @Override
+    public int hashCode() {
+        return naam.toLowerCase().hashCode();
     }
 }
