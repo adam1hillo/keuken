@@ -1,5 +1,6 @@
 package be.vdab.keuken.artikels;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 interface ArtikelRepository extends JpaRepository<Artikel, Long> {
+    @EntityGraph(attributePaths = "artikelGroep")
     List<Artikel> findByNaamContainingOrderByNaam(String woord);
 
     @Query("""

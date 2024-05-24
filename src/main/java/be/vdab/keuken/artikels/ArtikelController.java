@@ -51,10 +51,10 @@ class ArtikelController {
 
 
     @GetMapping(params = "naamBevat")
-    Stream<ArtikelBeknopt> findByNaamBevat(String naamBevat) {
+    Stream<ArtikelBeknoptMetArtikelGroep> findByNaamBevat(String naamBevat) {
         return artikelService.findByNaamBevat(naamBevat)
                 .stream()
-                .map(ArtikelBeknopt::new);
+                .map(ArtikelBeknoptMetArtikelGroep::new);
     }
     @GetMapping(params = "minimumWinst")
     Stream<ArtikelBeknopt> findByMinimumWinst(BigDecimal minimumWinst) {
@@ -73,6 +73,11 @@ class ArtikelController {
     private record ArtikelBeknopt(long id, String naam, BigDecimal verkoopprijs) {
         ArtikelBeknopt(Artikel artikel) {
             this(artikel.getId(), artikel.getNaam(), artikel.getVerkoopprijs());
+        }
+    }
+    private record ArtikelBeknoptMetArtikelGroep(long id, String naam, BigDecimal verkoopprijs, String artikelgroep) {
+        ArtikelBeknoptMetArtikelGroep(Artikel artikel) {
+            this(artikel.getId(), artikel.getNaam(), artikel.getVerkoopprijs(), artikel.getArtikelGroep().getNaam());
         }
     }
 }
