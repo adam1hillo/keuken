@@ -80,4 +80,6 @@ class ArtikelController {
             this(artikel.getId(), artikel.getNaam(), artikel.getVerkoopprijs(), artikel.getArtikelGroep().getNaam());
         }
     }
+//
+
 }
